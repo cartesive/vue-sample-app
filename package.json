@@ -22,7 +22,8 @@
     "@dpc-sdp/ripple-markup": "1.23.1",
     "@dpc-sdp/ripple-responsive-img": "^1.24.3",
     "core-js": "^3.8.1",
-    "vue": "^2.6.12"
+    "vue": "^2.6.12",
+    "vue-plotly": "^1.1.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.12.13",
