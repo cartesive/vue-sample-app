@@ -1,9 +1,9 @@
 <template>
   <section class="hello-ripple">
     <h3>Plotly with Ripple</h3>
-    <rpl-link href="https://ripple.sdp.vic.gov.au">Ripple</rpl-link>
+    <div v-if="loading" class="loading">Loading data, please wait...</div>
     <rpl-divider />
-    <Plotly :data="data" :layout="layout" :display-mode-bar="false"></Plotly>
+    <Plotly v-if="!loading" :data="data" :layout="layout" :display-mode-bar="false"></Plotly>
 
     <h3>Ripple text link</h3>
     <rpl-text-link
@@ -11,32 +11,34 @@
       text="Ripple"
       iconSymbol="arrow_right_primary"
       size="small"
-      />
+    />
     <rpl-divider />
 
     <h3>Ripple button</h3>
-    <rpl-button href="https://ripple.sdp.vic.gov.au" theme="primary">Ripple</rpl-button>
+    <rpl-button href="https://ripple.sdp.vic.gov.au" theme="primary"
+      >Ripple</rpl-button
+    >
     <rpl-divider />
 
     <h3>Ripple Markup</h3>
-    <rpl-markup
-      :html="html"
-    />
+    <rpl-markup :html="html" />
     <rpl-divider />
 
     <h3>Ripple Accordion</h3>
     <rpl-accordion
       title="Accordion set"
-      :accordions='[
+      :accordions="[
         {
-          "title": "Accordion Item",
-          "content": "<p>Lorem ipsum dolor sit amet, consectet adipiscing elit, seddo eiusmod tempore incididunt ut labore et dolore.</p>"
+          title: 'Accordion Item',
+          content:
+            '<p>Lorem ipsum dolor sit amet, consectet adipiscing elit, seddo eiusmod tempore incididunt ut labore et dolore.</p>',
         },
         {
-          "title": "Accordion Item",
-          "content": "<p><img src=\"https://via.placeholder.com/150\" /></p>"
-        }
-      ]'
+          title: 'Accordion Item',
+          content:
+            '<p><img src=&quot;https://via.placeholder.com/150&quot; /></p>',
+        },
+      ]"
       :single="false"
     />
     <rpl-divider />
@@ -48,9 +50,14 @@
     <h3>Ripple card</h3>
     <rpl-card-nav
       title="Card nav title"
-      :image='{"src":"https://placehold.it/580x340","focalPoint":{"x":"290","y":"170"},"width":580,"height":340}'
+      :image="{
+        src: 'https://placehold.it/580x340',
+        focalPoint: { x: '290', y: '170' },
+        width: 580,
+        height: 340,
+      }"
       summary="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt  labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-      :link='{"text":"Read more","url":"#"}'
+      :link="{ text: 'Read more', url: '#' }"
       topic="Arts, Culture and Humanities"
       contentType="Event"
       showMeta
@@ -62,47 +69,69 @@
 </template>
 
 <script>
-import { RplDivider } from '@dpc-sdp/ripple-global'
-import RplLink from '@dpc-sdp/ripple-link'
-import { RplTextLink } from '@dpc-sdp/ripple-link'
-import RplButton from '@dpc-sdp/ripple-button'
-import RplIcon from '@dpc-sdp/ripple-icon'
-import { RplCardNav } from '@dpc-sdp/ripple-card'
-import { RplMarkup } from '@dpc-sdp/ripple-markup'
-import { RplAccordion } from '@dpc-sdp/ripple-accordion'
-import { Plotly } from 'vue-plotly'
+import { RplDivider } from "@dpc-sdp/ripple-global";
+import { RplTextLink } from "@dpc-sdp/ripple-link";
+import RplButton from "@dpc-sdp/ripple-button";
+import RplIcon from "@dpc-sdp/ripple-icon";
+import { RplCardNav } from "@dpc-sdp/ripple-card";
+import { RplMarkup } from "@dpc-sdp/ripple-markup";
+import { RplAccordion } from "@dpc-sdp/ripple-accordion";
+import { Plotly } from "vue-plotly";
+
+var plotData = null;
+
 
 export default {
-  name: 'DataViz',
+  name: "DataViz",
   components: {
     RplDivider,
-    RplLink,
     RplTextLink,
     RplButton,
     RplIcon,
     RplCardNav,
     RplMarkup,
     RplAccordion,
-    Plotly
+    Plotly,
   },
-    data () { return {
-    data:[{
-      x: [1,2,3,4],
-      y: [10,15,13,17],
-      type:"scatter"
-    }],
-    layout:{
-      title: "My graph"
-    },
- 
+  data() {
+    return {
+      loading: true,
+      data: plotData,
+      layout: {
+        title: "My graph",
+      },
+
       html: `
 <p>Lorem ipsum dolor sit amet!!! consectetur adipiscing elit. Duis ut mauris magna. Nulla scelerisque maximus purus eu lacinia. In vestibulum elit augue, aliquet lobortis tellus interdum eu.</p>
 <p><img src="https://via.placeholder.com/150" /></p>
 <rpl-button href="https://ripple.sdp.vic.gov.au" theme="primary">Ripple</rpl-button>
-`
-    }
-  }
-}
+`,
+    };
+  },
+  created() {
+    //https://discover.data.vic.gov.au/api/3/action/datastore_search?resource_id=d35dd0fb-5288-4194-8f77-373e2b2cc44d&limit=5
+    fetch(
+      "https://discover.data.vic.gov.au/api/3/action/datastore_search?resource_id=e3c72a49-6752-4158-82e6-116bea8f55c8&limit=8"
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        this.html = data.result.total;
+        this.data = [
+          {
+            x: data.result.records.map((item) => {
+              return item.postcode;
+            }),
+            y: data.result.records.map((item) => {
+              return item.cases;
+            }),
+            type: "bar",
+          },
+        ];
+        //y = w.result.records.map((x) => {return x.postcode})
+        this.loading = false;
+      });
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
