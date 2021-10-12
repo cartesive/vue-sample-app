@@ -8,17 +8,17 @@
     <p>
       This is a SPA created by <a href="https://cli.vuejs.org/" target="_blank">Vue CLI</a> and <a href="https://www.ripple.sdp.vic.gov.au/" target="_blank">Ripple components</a>
     </p>
-    <hello-ripple />
+    <data-viz />
   </div>
 </template>
 
 <script>
-import HelloRipple from './components/HelloRipple.vue'
+import DataViz from './components/DataViz.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloRipple
+    DataViz
   }
 }
 </script>
