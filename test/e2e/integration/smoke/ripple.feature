@@ -6,4 +6,4 @@ Feature: Ripple components
     Given I visit the Vue router path "/"
   @smoke
   Scenario: Use some Ripple example components
-    And the example ripple components should exist
+    And the example data-viz component should exist

@@ -1,5 +1,5 @@
 <template>
-  <section class="hello-ripple">
+  <section class="hello-ripple rpl-data-viz">
     <h3>Plotly with Ripple</h3>
     <div v-if="loading" class="loading">Loading data, please wait...</div>
     <rpl-divider />
@@ -30,7 +30,7 @@ export default {
       loading: true,
       data: plotData,
       layout: {
-        title: "My graph",
+        title: "COVID cases: inner melbourne, by postcode",
       },
 
       html: `

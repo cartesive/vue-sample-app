@@ -8,10 +8,6 @@ Given(`I visit the Vue router path {string}`, url => {
   })
 })
 
-Then(`the example ripple components should exist`, () => {
-  cy.get('.rpl-link').should('exist')
-  cy.get('.rpl-text-link').should('exist')
-  cy.get('svg.rpl-icon').should('exist')
-  cy.get('.rpl-card-nav').should('exist')
-  cy.get('.rpl-button').should('exist')
+Then(`the example data-viz component should exist`, () => {
+  cy.get('.rpl-accordion').should('exist')
 })
