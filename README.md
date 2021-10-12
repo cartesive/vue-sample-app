@@ -1,38 +1,42 @@
-# Example for using ripple in Vue.js(Not Nuxt.js)
+# Simple example of using Plotly in a Vue/Ripple app.
 
-This is a example for using Ripple in a Vue.js app. For using it in Nuxt.js, please check [ripple-nuxt-ui](https://github.com/dpc-sdp/ripple/blob/develop/packages/ripple-nuxt-ui/README.md)
+This is a simple example of using a data plot from a live data source in plotly.
 
 ## Intro
 
-This example is created by Vue cli as a clean project.
+The data plot has been implemented as a stand-alone component, which could either be specialised for this specific use, or generalised by accepting a configurable data-source url and data-limit as parameters.
 
-Two Ripple components installed just for demo how to install them.
+### Accessibility
 
-### Dependencies
+The component includes an ARIA-labelled caption, which has a full-text description of the figure.
 
-Install below dev dependencies in your Vue project to make icon work.
+### Data retrieval
+
+The data used in this example is [https://discover.data.vic.gov.au/dataset/victorian-coronavirus-data/resource/e3c72a49-6752-4158-82e6-116bea8f55c8](COVID cases by postcode), and we use the data-API to limit the results to the first 8 postcodes, which are inner-city postcodes.
+
+**Note:** For production deployment, it may be wise to run a serverless task on a daily basis, to sweep the API json to a static CDN location. The data does not change very many times in 24 hours, so it makes sense to reduce the load on the upstream API by caching the latest json in this way.
+
+### Testing
+
+The default test was modified to ensure the component appears in the app successfully. This is only a 'smoke' test, and a detailed unit test would be required, with mock data, to fully test the component.
+
+### Future improvements
+
+Two error states should be added to the this 
+
+## Technical  caveats
+
+The node-sass and sass-loader libraries seem to be incompatible with the very latest version of node, and not able to be updated (due to the Acorn version dependency?):
 
 ```
-npm install sass-resources-loader --save-dev
+nvm ls
+->     v15.14.0 (7.7.6)
+       v16.11.0 (8.0.0)
 ```
 
-### Webpack configs
+Use nvm to switch to v15.14.0 (7.7.6) if required.
 
-Some config required for making things like icon working.
-
-Check [/vue.config.js](/vue.config.js) for more details.
-
-### Using Ripple components
-
-Check [/src/App.vue](/src/App.vue) and [/src/components/HelloRipple.vue](/src/components/HelloRipple.vue) for more details.
-
-### Install Ripple plugin
-
-Optionally install [Ripple plugin]((https://github.com/dpc-sdp/ripple/tree/develop/packages/components/Atoms/Global#rploptions)) if you need to use some options.
-
-We added it in this [/src/main.js](/src/main.js).
-
-## Project setup
+## Project set up
 ```
 yarn install
 ```
