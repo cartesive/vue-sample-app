@@ -20,9 +20,11 @@ The data used in this example is [https://discover.data.vic.gov.au/dataset/victo
 
 The default test was modified to ensure the component appears in the app successfully. This is only a 'smoke' test, and a detailed unit test would be required, with mock data, to fully test the component.
 
+![indiciative screeshot](https://raw.githubusercontent.com/cartesive/vue-sample-app/setup/documentation/src/assets/indicative-screen-shot.png)
+
 ### Future improvements
 
-Two error states should be added to the this 
+Two error states should be added to the the component for when the API return a result, but the status is "unsuccessful" and also when the API does not return at all, or a malformed result.
 
 ## Technical  caveats
 
