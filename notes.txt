@@ -1,0 +1,12 @@
+
+
+
+Install package does not include the components:
+
+These dependencies were not found:
+
+* @dpc-sdp/ripple-grants/grants-status in ./node_modules/@dpc-sdp/ripple-card/mixins/card.js
+* @dpc-sdp/ripple-grid in ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/@dpc-sdp/ripple-card/CardCompactGrid.vue?vue&type=script&lang=js&
+* @dpc-sdp/ripple-responsive-img in ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/@dpc-sdp/ripple-card/CardCta.vue?vue&type=script&lang=js&
+
+To install them, you can run: npm install --save @dpc-sdp/ripple-grants/grants-status @dpc-sdp/ripple-grid @dpc-sdp/ripple-responsive-img
