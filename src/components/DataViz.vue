@@ -1,8 +1,9 @@
 <template>
   <section class="hello-ripple">
-    <h3>Ripple link</h3>
+    <h3>Plotly with Ripple</h3>
     <rpl-link href="https://ripple.sdp.vic.gov.au">Ripple</rpl-link>
     <rpl-divider />
+    <Plotly :data="data" :layout="layout" :display-mode-bar="false"></Plotly>
 
     <h3>Ripple text link</h3>
     <rpl-text-link
@@ -69,6 +70,7 @@ import RplIcon from '@dpc-sdp/ripple-icon'
 import { RplCardNav } from '@dpc-sdp/ripple-card'
 import { RplMarkup } from '@dpc-sdp/ripple-markup'
 import { RplAccordion } from '@dpc-sdp/ripple-accordion'
+import { Plotly } from 'vue-plotly'
 
 export default {
   name: 'DataViz',
@@ -80,10 +82,19 @@ export default {
     RplIcon,
     RplCardNav,
     RplMarkup,
-    RplAccordion
+    RplAccordion,
+    Plotly
   },
-  data () {
-    return {
+    data () { return {
+    data:[{
+      x: [1,2,3,4],
+      y: [10,15,13,17],
+      type:"scatter"
+    }],
+    layout:{
+      title: "My graph"
+    },
+ 
       html: `
 <p>Lorem ipsum dolor sit amet!!! consectetur adipiscing elit. Duis ut mauris magna. Nulla scelerisque maximus purus eu lacinia. In vestibulum elit augue, aliquet lobortis tellus interdum eu.</p>
 <p><img src="https://via.placeholder.com/150" /></p>
