@@ -12,7 +12,13 @@ The component includes an ARIA-labelled caption, which has a full-text descripti
 
 ### Data retrieval
 
-The data used in this example is [https://discover.data.vic.gov.au/dataset/victorian-coronavirus-data/resource/e3c72a49-6752-4158-82e6-116bea8f55c8](COVID cases by postcode), and we use the data-API to limit the results to the first 8 postcodes, which are inner-city postcodes.
+The data used in this example is [COVID cases by postcode](https://discover.data.vic.gov.au/dataset/victorian-coronavirus-data/resource/e3c72a49-6752-4158-82e6-116bea8f55c8), and we use the data-API to limit the results to the first 8 postcodes, which are inner-city postcodes.
+
+Specifically, the data-API url used is:
+
+```
+https://discover.data.vic.gov.au/api/3/action/datastore_search?resource_id=e3c72a49-6752-4158-82e6-116bea8f55c8&limit=8
+```
 
 **Note:** For production deployment, it may be wise to run a serverless task on a daily basis, to sweep the API json to a static CDN location. The data does not change very many times in 24 hours, so it makes sense to reduce the load on the upstream API by caching the latest json in this way.
 
