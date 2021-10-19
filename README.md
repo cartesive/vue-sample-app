@@ -30,7 +30,9 @@ The default test was modified to ensure the component appears in the app success
 
 ### Future improvements
 
-Two error states should be added to the the component for when the API return a result, but the status is "unsuccessful" and also when the API does not return at all, or a malformed result.
+**Update:** Robustness has been added with simple error handling on the API fetching. (19-Oct-2021)
+
+~~Two error states should be added to the the component for when the API return a result, but the status is "unsuccessful" and also when the API does not return at all, or a malformed result.~~
 
 ## Technical  caveats
 

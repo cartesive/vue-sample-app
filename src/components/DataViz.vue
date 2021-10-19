@@ -74,6 +74,11 @@ export default {
           },
         ];
         this.loading = false;
+      })
+      .catch((error) => {
+        this.ariacaption = `Sorry, something went wront. Please try again later. [${error}]`;
+        // Note: it is assumed that there would be some organisational error logging service or queue here: 
+        console.log(error);
       });
   },
 };
